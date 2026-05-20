@@ -66,15 +66,26 @@
 
   <main class="main-dashboard flow-grid">
     <!-- Welcome Section -->
-    <section class="welcome-sec">
-      <h2 class="font-headline-lg" style="margin-bottom:4px;">Bem-vindo, Operador</h2>
-      <p class="font-body-lg text-on-surface-variant">Visão geral da planta industrial e status dos fluxos operacionais.
-      </p>
+    <section class="welcome-sec" style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 32px;">
+      <div>
+        <h2 class="font-headline-lg" style="margin-bottom:4px;">Dashboard de Métricas e Operação</h2>
+        <p class="font-body-lg text-on-surface-variant">Visão unificada da planta: status, OEE e eficiência produtiva.</p>
+      </div>
+      <div style="display: flex; gap: 8px;">
+        <button class="btn-primary" style="background: var(--surface-container-high); color: var(--on-surface); border: 1px solid var(--outline-variant);">
+          <span class="material-symbols-outlined" style="font-size: 18px;">calendar_today</span>
+          Últimos 7 dias
+        </button>
+        <button class="btn-primary" onclick="window.location.href='export.html'">
+          <span class="material-symbols-outlined" style="font-size: 18px;">download</span>
+          EXPORTAR
+        </button>
+      </div>
     </section>
 
     <!-- Dashboard Grid -->
     <div class="dashboard-grid">
-      <!-- Setor Produção -->
+      <!-- 1. Operational Cards (from old dashboard) -->
       <div class="card col-4 status-bar-active">
         <div class="card-header">
           <div class="card-title-group">
@@ -95,7 +106,6 @@
         </div>
       </div>
 
-      <!-- Setor Qualidade -->
       <div class="card col-4 status-bar-maintenance">
         <div class="card-header">
           <div class="card-title-group">
@@ -116,7 +126,6 @@
         </div>
       </div>
 
-      <!-- Novo Fluxo -->
       <div class="card col-4 status-bar-active">
         <div class="card-header">
           <div class="card-title-group">
@@ -137,11 +146,151 @@
         </div>
       </div>
 
-      <!-- Status Takt -->
+      <!-- 2. OEE KPIs (from metrics) -->
+      <div class="card col-3">
+        <div class="card-header">
+          <div class="card-title-group">
+            <span class="material-symbols-outlined text-tertiary">query_stats</span>
+            <h3 class="font-label-md text-on-surface-variant">OEE GLOBAL</h3>
+          </div>
+        </div>
+        <div class="card-body" style="margin-top: 16px;">
+          <div style="display: flex; align-items: baseline; gap: 8px;">
+            <span class="font-display-lg text-tertiary">78.4%</span>
+            <span class="font-label-sm text-tertiary">+2.1%</span>
+          </div>
+        </div>
+        <div class="progress-track mt-sm" style="height: 4px; margin-top: 12px;">
+          <div class="progress-fill bg-tertiary" style="width: 78.4%"></div>
+        </div>
+      </div>
+
+      <div class="card col-3">
+        <div class="card-header">
+          <div class="card-title-group">
+            <span class="material-symbols-outlined text-primary">timer</span>
+            <h3 class="font-label-md text-on-surface-variant">DISPONIBILIDADE</h3>
+          </div>
+        </div>
+        <div class="card-body" style="margin-top: 16px;">
+          <div style="display: flex; align-items: baseline; gap: 8px;">
+            <span class="font-display-lg text-primary">85.0%</span>
+          </div>
+        </div>
+        <div class="progress-track mt-sm" style="height: 4px; margin-top: 12px;">
+          <div class="progress-fill" style="background: var(--primary); width: 85%"></div>
+        </div>
+      </div>
+
+      <div class="card col-3">
+        <div class="card-header">
+          <div class="card-title-group">
+            <span class="material-symbols-outlined text-primary">speed</span>
+            <h3 class="font-label-md text-on-surface-variant">PERFORMANCE</h3>
+          </div>
+        </div>
+        <div class="card-body" style="margin-top: 16px;">
+          <div style="display: flex; align-items: baseline; gap: 8px;">
+            <span class="font-display-lg text-primary">94.2%</span>
+          </div>
+        </div>
+        <div class="progress-track mt-sm" style="height: 4px; margin-top: 12px;">
+          <div class="progress-fill" style="background: var(--primary); width: 94.2%"></div>
+        </div>
+      </div>
+
+      <div class="card col-3">
+        <div class="card-header">
+          <div class="card-title-group">
+            <span class="material-symbols-outlined text-error">verified</span>
+            <h3 class="font-label-md text-on-surface-variant">QUALIDADE</h3>
+          </div>
+        </div>
+        <div class="card-body" style="margin-top: 16px;">
+          <div style="display: flex; align-items: baseline; gap: 8px;">
+            <span class="font-display-lg text-error">97.8%</span>
+            <span class="font-label-sm text-error">-0.5%</span>
+          </div>
+        </div>
+        <div class="progress-track mt-sm" style="height: 4px; margin-top: 12px;">
+          <div class="progress-fill bg-error" style="width: 97.8%"></div>
+        </div>
+      </div>
+
+      <!-- 3. Takt vs Cycle Bar Chart (from metrics) + YAMAZUMI (from dashboard) -->
+      <div class="card col-8 status-card">
+        <div class="card-header" style="margin-bottom:16px;">
+          <h4 class="font-headline-sm">Eficiência do Ciclo Produtivo</h4>
+          <span class="font-label-sm text-on-surface-variant">Histórico Semanal (Minutos por unidade)</span>
+        </div>
+        <div style="height: 240px; display: flex; align-items: flex-end; gap: 16px; padding-top: 24px; position: relative; border-bottom: 1px solid var(--outline-variant);">
+          <!-- Takt Line -->
+          <div style="position: absolute; top: 40px; left: 0; width: 100%; border-top: 1px dashed var(--tertiary);">
+             <span style="position: absolute; right: 0; top: -20px; font-size: 10px; color: var(--tertiary);">TAKT: 45m</span>
+          </div>
+          
+          <!-- Bars -->
+          <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+            <div style="width: 100%; background: var(--primary); height: 120px; border-radius: 4px 4px 0 0; opacity: 0.8; transition: var(--transition-fluid); cursor: pointer;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.8'"></div>
+            <span class="font-label-sm">SEG</span>
+          </div>
+          <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+            <div style="width: 100%; background: var(--primary); height: 135px; border-radius: 4px 4px 0 0; opacity: 0.8; transition: var(--transition-fluid); cursor: pointer;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.8'"></div>
+            <span class="font-label-sm">TER</span>
+          </div>
+          <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+            <div style="width: 100%; background: var(--error); height: 180px; border-radius: 4px 4px 0 0; transition: var(--transition-fluid); cursor: pointer;" onmouseover="this.style.filter='brightness(1.2)'" onmouseout="this.style.filter='none'"></div>
+            <span class="font-label-sm">QUA</span>
+          </div>
+          <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+            <div style="width: 100%; background: var(--primary); height: 140px; border-radius: 4px 4px 0 0; opacity: 0.8; transition: var(--transition-fluid); cursor: pointer;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.8'"></div>
+            <span class="font-label-sm">QUI</span>
+          </div>
+          <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+            <div style="width: 100%; background: var(--tertiary); height: 110px; border-radius: 4px 4px 0 0; transition: var(--transition-fluid); cursor: pointer;" onmouseover="this.style.filter='brightness(1.2)'" onmouseout="this.style.filter='none'"></div>
+            <span class="font-label-sm">SEX</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card col-4">
+        <div class="card-header" style="margin-bottom:16px;">
+          <span class="font-label-md text-primary font-bold">BALANCEAMENTO (YAMAZUMI)</span>
+          <span class="material-symbols-outlined text-primary">equalizer</span>
+        </div>
+
+        <div style="position:relative; height:180px; display:flex; flex-direction:column; justify-content:space-between;">
+          <div style="position:absolute; right:25%; top:0; bottom:0; border-left:1px dashed rgba(176,198,255,0.5); z-index:10; display:flex; flex-direction:column; align-items:center;">
+            <span style="background:var(--primary); color:var(--on-primary); font-size:10px; padding:2px 4px; border-radius:2px; transform:translateY(-8px);">TAKT</span>
+          </div>
+
+          <div style="display:flex; flex-direction:column; gap:4px;">
+            <span class="font-label-sm text-on-surface-variant">Bobinagem</span>
+            <div style="height:12px; background:rgba(176,198,255,0.2); width:50%; border-radius:0 2px 2px 0;"></div>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:4px;">
+            <span class="font-label-sm text-error font-bold">Montagem (Gargalo)</span>
+            <div style="height:12px; background:var(--error); width:85%; border-radius:0 2px 2px 0;"></div>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:4px;">
+            <span class="font-label-sm text-on-surface-variant">Testes</span>
+            <div style="height:12px; background:rgba(176,198,255,0.2); width:60%; border-radius:0 2px 2px 0;"></div>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:4px;">
+            <span class="font-label-sm text-on-surface-variant">Acabamento</span>
+            <div style="height:12px; background:rgba(176,198,255,0.2); width:40%; border-radius:0 2px 2px 0;"></div>
+          </div>
+        </div>
+        <p style="font-size:10px; color:var(--on-surface-variant); font-style:italic; text-align:center; border-top:1px solid var(--outline-variant); padding-top:8px; margin-top:16px;">
+          Análise em Tempo Real: Setor Montagem excedendo limite em 12%.
+        </p>
+      </div>
+
+      <!-- 4. Ritmo de Produção (Progress from old dashboard) + Pareto (from metrics) -->
       <div class="card col-8 status-card">
         <div class="card-header" style="margin-bottom:16px;">
           <h4 class="font-headline-sm">Ritmo de Produção (Takt vs. Cycle)</h4>
-          <span class="font-label-sm text-on-surface-variant">Minutos / Unidade</span>
+          <span class="font-label-sm text-on-surface-variant">Por Modelo de Transformador</span>
         </div>
 
         <div class="progress-item">
@@ -186,57 +335,112 @@
         </div>
       </div>
 
-      <!-- Right Side Sidebar Info -->
-      <div class="col-4" style="display:flex; flex-direction:column; gap:20px;">
-        <div class="card"
-          style="flex-direction:row; justify-content:space-between; align-items:center; cursor:pointer;">
-          <div style="display:flex; align-items:center; gap:16px;">
-            <div style="padding:8px; background:var(--surface-container-highest); border-radius:4px;">
-              <span class="material-symbols-outlined text-primary">history</span>
-            </div>
-            <span class="font-label-md text-on-surface">HISTÓRICO</span>
-          </div>
-          <span class="material-symbols-outlined text-on-surface-variant">arrow_forward</span>
+      <div class="card col-4">
+        <div class="card-header" style="margin-bottom:16px;">
+          <h4 class="font-headline-sm">Motivos de Parada</h4>
+          <span class="font-label-sm text-on-surface-variant">Top ofensores (Minutos)</span>
         </div>
-
-        <div class="card">
-          <div class="card-header" style="margin-bottom:16px;">
-            <span class="font-label-md text-primary font-bold">BALANCEAMENTO (YAMAZUMI)</span>
-            <span class="material-symbols-outlined text-primary">equalizer</span>
-          </div>
-
-          <div
-            style="position:relative; height:180px; display:flex; flex-direction:column; justify-content:space-between;">
-            <div
-              style="position:absolute; right:25%; top:0; bottom:0; border-left:1px dashed rgba(176,198,255,0.5); z-index:10; display:flex; flex-direction:column; align-items:center;">
-              <span
-                style="background:var(--primary); color:var(--on-primary); font-size:10px; padding:2px 4px; border-radius:2px; transform:translateY(-8px);">TAKT</span>
+        <div style="display: flex; flex-direction: column; gap: 20px;">
+          <div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+              <span class="font-label-md">Manutenção Corretiva</span>
+              <span class="font-label-md text-error">142m</span>
             </div>
-
-            <div style="display:flex; flex-direction:column; gap:4px;">
-              <span class="font-label-sm text-on-surface-variant">Bobinagem</span>
-              <div style="height:12px; background:rgba(176,198,255,0.2); width:50%; border-radius:0 2px 2px 0;"></div>
-            </div>
-            <div style="display:flex; flex-direction:column; gap:4px;">
-              <span class="font-label-sm text-error font-bold">Montagem (Gargalo)</span>
-              <div style="height:12px; background:var(--error); width:85%; border-radius:0 2px 2px 0;"></div>
-            </div>
-            <div style="display:flex; flex-direction:column; gap:4px;">
-              <span class="font-label-sm text-on-surface-variant">Testes</span>
-              <div style="height:12px; background:rgba(176,198,255,0.2); width:60%; border-radius:0 2px 2px 0;"></div>
-            </div>
-            <div style="display:flex; flex-direction:column; gap:4px;">
-              <span class="font-label-sm text-on-surface-variant">Acabamento</span>
-              <div style="height:12px; background:rgba(176,198,255,0.2); width:40%; border-radius:0 2px 2px 0;"></div>
+            <div class="progress-track" style="height: 8px;">
+              <div class="progress-fill bg-error" style="width: 100%"></div>
             </div>
           </div>
-          <p
-            style="font-size:10px; color:var(--on-surface-variant); font-style:italic; text-align:center; border-top:1px solid var(--outline-variant); padding-top:8px; margin-top:16px;">
-            Análise em Tempo Real: Setor Montagem excedendo limite em 12%.
-          </p>
+          <div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+              <span class="font-label-md">Falta de Material</span>
+              <span class="font-label-md text-primary">85m</span>
+            </div>
+            <div class="progress-track" style="height: 8px;">
+              <div class="progress-fill" style="background: var(--primary); width: 60%"></div>
+            </div>
+          </div>
+          <div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+              <span class="font-label-md">Setup de Máquina</span>
+              <span class="font-label-md text-primary">45m</span>
+            </div>
+            <div class="progress-track" style="height: 8px;">
+              <div class="progress-fill" style="background: var(--primary); width: 32%"></div>
+            </div>
+          </div>
+          <div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+              <span class="font-label-md">Limpeza</span>
+              <span class="font-label-md text-primary">20m</span>
+            </div>
+            <div class="progress-track" style="height: 8px;">
+              <div class="progress-fill" style="background: var(--primary); width: 14%"></div>
+            </div>
+          </div>
         </div>
       </div>
 
+      <!-- 5. Tabela de Auditoria (from metrics) -->
+      <div class="card col-12">
+        <div class="card-header" style="margin-bottom:16px;">
+          <div style="display: flex; justify-content: space-between; width: 100%; align-items: center;">
+            <div>
+              <h4 class="font-headline-sm">Registro de Ocorrências</h4>
+              <span class="font-label-sm text-on-surface-variant">Log detalhado de paradas (Ordenado por Duração)</span>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <div style="padding: 6px 16px; border: 1px solid var(--outline-variant); border-radius: 20px; font-size: 12px; display: flex; align-items: center; gap: 6px; cursor: pointer; background: var(--surface-container-high); transition: var(--transition-fluid);" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--outline-variant)'">
+                <span class="material-symbols-outlined" style="font-size: 16px;">calendar_today</span>
+                Data
+              </div>
+              <div style="padding: 6px 16px; border: 1px solid var(--primary); border-radius: 20px; font-size: 12px; display: flex; align-items: center; gap: 6px; cursor: pointer; background: rgba(176,198,255,0.1); color: var(--primary);">
+                <span class="material-symbols-outlined" style="font-size: 16px;">warning</span>
+                Motivo
+              </div>
+              <div style="padding: 6px 16px; border: 1px solid var(--outline-variant); border-radius: 20px; font-size: 12px; display: flex; align-items: center; gap: 6px; cursor: pointer; background: var(--surface-container-high); transition: var(--transition-fluid);" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--outline-variant)'">
+                <span class="material-symbols-outlined" style="font-size: 16px;">category</span>
+                Tipo
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="overflow-x: auto;">
+          <table style="width: 100%; text-align: left; border-collapse: collapse;">
+            <thead>
+              <tr style="border-bottom: 1px solid var(--outline-variant);">
+                <th style="padding: 12px 16px; font-family: var(--font-mono); font-size: 11px; color: var(--on-surface-variant);">DATA/HORA</th>
+                <th style="padding: 12px 16px; font-family: var(--font-mono); font-size: 11px; color: var(--on-surface-variant);">SETOR</th>
+                <th style="padding: 12px 16px; font-family: var(--font-mono); font-size: 11px; color: var(--on-surface-variant);">MOTIVO</th>
+                <th style="padding: 12px 16px; font-family: var(--font-mono); font-size: 11px; color: var(--primary);">DURAÇÃO <span class="material-symbols-outlined" style="font-size:14px; vertical-align:middle; margin-left: 4px;">arrow_downward</span></th>
+                <th style="padding: 12px 16px; font-family: var(--font-mono); font-size: 11px; color: var(--on-surface-variant);">STATUS</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom: 1px solid rgba(68, 70, 79, 0.3); transition: var(--transition-fluid); cursor: pointer;" onmouseover="this.style.backgroundColor='var(--surface-container-high)'" onmouseout="this.style.backgroundColor='transparent'">
+                <td style="padding: 16px; font-size: 13px; color: var(--on-surface);">20/05/2026 14:30</td>
+                <td style="padding: 16px; font-size: 13px; color: var(--on-surface);">Montagem BT</td>
+                <td style="padding: 16px; font-size: 13px; color: var(--on-surface);">Manutenção Corretiva</td>
+                <td style="padding: 16px; font-size: 14px; font-family: var(--font-mono); color: var(--error); font-weight: 600;">142m</td>
+                <td style="padding: 16px;"><span class="badge badge-maint">Resolvido</span></td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(68, 70, 79, 0.3); transition: var(--transition-fluid); cursor: pointer;" onmouseover="this.style.backgroundColor='var(--surface-container-high)'" onmouseout="this.style.backgroundColor='transparent'">
+                <td style="padding: 16px; font-size: 13px; color: var(--on-surface);">20/05/2026 09:15</td>
+                <td style="padding: 16px; font-size: 13px; color: var(--on-surface);">Bobinagem AT</td>
+                <td style="padding: 16px; font-size: 13px; color: var(--on-surface);">Falta de Material</td>
+                <td style="padding: 16px; font-size: 14px; font-family: var(--font-mono); color: var(--primary); font-weight: 600;">85m</td>
+                <td style="padding: 16px;"><span class="badge badge-active">Em Andamento</span></td>
+              </tr>
+              <tr style="transition: var(--transition-fluid); cursor: pointer;" onmouseover="this.style.backgroundColor='var(--surface-container-high)'" onmouseout="this.style.backgroundColor='transparent'">
+                <td style="padding: 16px; font-size: 13px; color: var(--on-surface);">19/05/2026 16:45</td>
+                <td style="padding: 16px; font-size: 13px; color: var(--on-surface);">Testes Finais</td>
+                <td style="padding: 16px; font-size: 13px; color: var(--on-surface);">Setup</td>
+                <td style="padding: 16px; font-size: 14px; font-family: var(--font-mono); color: var(--on-surface-variant); font-weight: 600;">45m</td>
+                <td style="padding: 16px;"><span class="badge badge-maint">Resolvido</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </main>
 
