@@ -4,64 +4,59 @@
    CSS VARIABLES - IndustraFlow Design System
    ========================================================================== */
 :root {
-  /* Colors */
-  --surface: #0d1321;
-  --surface-dim: #0d1321;
-  --surface-bright: #333948;
-  --surface-container-lowest: #080e1b;
-  --surface-container-low: #151b29;
-  --surface-container: #191f2d;
-  --surface-container-high: #242a38;
-  --surface-container-highest: #2f3543;
-  --on-surface: #dde2f6;
-  --on-surface-variant: #c5c6d0;
-  --inverse-surface: #dde2f6;
-  --inverse-on-surface: #2a303f;
-  --outline: #8e909a;
-  --outline-variant: #44464f;
-  --primary: #b0c6ff;
-  --on-primary: #152e60;
-  --primary-container: #7a90c7;
-  --on-primary-container: #0c2759;
-  --inverse-primary: #475d91;
-  --secondary: #b3ccc1;
-  --on-secondary: #1e352d;
-  --secondary-container: #374e45;
-  --on-secondary-container: #a5beb3;
-  --tertiary: #6adbaf;
-  --on-tertiary: #003827;
-  --tertiary-container: #28a37b;
-  --on-tertiary-container: #003121;
-  --error: #ffb4ab;
-  --on-error: #690005;
-  --error-container: #93000a;
-  --on-error-container: #ffdad6;
-  --background: #0d1321;
-  --on-background: #dde2f6;
-  --surface-variant: #2f3543;
+  /* Neon Colors */
+  --primary: #00f0ff;
+  --on-primary: #000000;
+  --primary-container: rgba(0, 240, 255, 0.15);
+  --tertiary: #39ff14;
+  --on-tertiary: #000000;
+  --tertiary-container: rgba(57, 255, 20, 0.15);
+  --error: #ff007f;
+  --on-error: #ffffff;
+  
+  /* Glass Surfaces */
+  --surface: rgba(10, 10, 15, 0.6);
+  --surface-dim: rgba(5, 5, 10, 0.8);
+  --surface-bright: rgba(255, 255, 255, 0.05);
+  --surface-container-lowest: rgba(0, 0, 0, 0.2);
+  --surface-container-low: rgba(255, 255, 255, 0.02);
+  --surface-container: rgba(255, 255, 255, 0.04);
+  --surface-container-high: rgba(255, 255, 255, 0.06);
+  --surface-container-highest: rgba(255, 255, 255, 0.08);
+  
+  /* Text */
+  --on-surface: #ffffff;
+  --on-surface-variant: #a0a5b5;
+  --outline: rgba(255, 255, 255, 0.12);
+  --outline-variant: rgba(255, 255, 255, 0.06);
+  
+  /* Background Base */
+  --background: #050508;
+  --on-background: #ffffff;
+  --surface-variant: rgba(255, 255, 255, 0.05);
 
   /* Typography */
   --font-sans: 'Inter', sans-serif;
   --font-mono: 'Geist Mono', 'Geist', monospace;
 
   /* Layout & Spacing */
-  --spacing-xs: 4px;
-  --spacing-sm: 8px;
-  --spacing-md: 16px;
-  --spacing-lg: 24px;
-  --spacing-xl: 32px;
-  --grid-gutter: 20px;
-  --canvas-margin: 40px;
+  --spacing-xs: 6px;
+  --spacing-sm: 12px;
+  --spacing-md: 20px;
+  --spacing-lg: 32px;
+  --spacing-xl: 48px;
+  --grid-gutter: 24px;
+  --canvas-margin: 5vw;
 
-  /* Shapes */
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 16px;
-  --radius-xl: 24px;
+  /* Shapes - More Minimalist & Rounded */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
   --radius-full: 9999px;
 
   /* Transitions */
-  --transition-fluid: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  --transition-fluid: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* ==========================================================================
@@ -72,11 +67,17 @@ body {
   margin: 0;
   padding: 0;
   background-color: var(--background);
+  background-image: 
+    radial-gradient(circle at 20% 30%, rgba(0, 240, 255, 0.08), transparent 40%),
+    radial-gradient(circle at 80% 20%, rgba(255, 0, 127, 0.08), transparent 40%),
+    radial-gradient(circle at 50% 80%, rgba(57, 255, 20, 0.05), transparent 40%);
+  background-attachment: fixed;
   color: var(--on-background);
   font-family: var(--font-sans);
   font-size: 14px;
   line-height: 20px;
   -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
 }
 
 h1, h2, h3, h4, p { margin: 0; }
@@ -107,9 +108,10 @@ input { font: inherit; }
   background-size: 20px 20px;
 }
 .glass-panel {
-  backdrop-filter: blur(16px);
-  background-color: rgba(25, 31, 45, 0.7);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(24px) saturate(150%);
+  -webkit-backdrop-filter: blur(24px) saturate(150%);
+  background-color: rgba(255, 255, 255, 0.02);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(255, 255, 255, 0.05);
 }
 .diamond { clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); }
@@ -125,18 +127,25 @@ input { font: inherit; }
    ========================================================================== */
 /* Buttons */
 .btn-primary {
-  background-color: var(--primary);
-  color: var(--on-primary);
+  background-color: rgba(0, 240, 255, 0.1);
+  color: var(--primary);
+  border: 1px solid var(--primary);
   padding: var(--spacing-sm) var(--spacing-md);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-full);
   font-weight: 600;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: var(--spacing-sm);
   transition: var(--transition-fluid);
+  box-shadow: 0 0 16px rgba(0, 240, 255, 0.2);
 }
-.btn-primary:hover { filter: brightness(1.1); }
+.btn-primary:hover {
+  background-color: var(--primary);
+  color: var(--on-primary);
+  box-shadow: 0 0 32px rgba(0, 240, 255, 0.6);
+  transform: translateY(-2px);
+}
 .btn-primary:active { transform: scale(0.95); }
 .btn-full { width: 100%; padding: var(--spacing-md); }
 
@@ -231,7 +240,9 @@ input { font: inherit; }
    ========================================================================== */
 .app-header {
   position: fixed; top: 0; width: 100%; z-index: 50; height: 64px;
-  background-color: var(--surface-container);
+  background-color: rgba(5, 5, 10, 0.4);
+  backdrop-filter: blur(24px) saturate(150%);
+  -webkit-backdrop-filter: blur(24px) saturate(150%);
   border-bottom: 1px solid var(--outline-variant);
   display: flex; align-items: center; justify-content: space-between; padding: 0 var(--spacing-md);
 }
@@ -242,7 +253,9 @@ input { font: inherit; }
 
 .sidebar {
   position: fixed; top: 0; left: 0; bottom: 0; width: 288px; z-index: 60;
-  background-color: var(--surface-container-highest);
+  background-color: rgba(5, 5, 10, 0.6);
+  backdrop-filter: blur(24px) saturate(150%);
+  -webkit-backdrop-filter: blur(24px) saturate(150%);
   border-right: 1px solid var(--outline-variant);
   transform: translateX(-100%); transition: var(--transition-fluid);
   display: flex; flex-direction: column;
@@ -273,13 +286,16 @@ input { font: inherit; }
 @media (min-width: 768px) { .dashboard-grid { grid-template-columns: repeat(12, 1fr); } }
 
 .card {
-  background-color: var(--surface-container-high);
-  border: 2px solid var(--outline-variant);
-  border-radius: var(--radius-md); padding: var(--spacing-md);
+  background-color: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(16px) saturate(150%);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-lg); padding: var(--spacing-lg);
   display: flex; flex-direction: column; gap: var(--spacing-md);
   transition: var(--transition-fluid);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
 }
-.card:hover { border-color: var(--primary); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1); }
+.card:hover { border-color: rgba(255, 255, 255, 0.15); transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0, 240, 255, 0.05); }
 .col-3 { grid-column: span 3; }
 .col-4 { grid-column: span 4; }
 .col-6 { grid-column: span 6; }
@@ -296,7 +312,7 @@ input { font: inherit; }
 .card-footer { padding-top: var(--spacing-md); border-top: 1px solid var(--outline-variant); display: flex; justify-content: space-between; align-items: center; }
 
 /* Status Card styling */
-.status-card { background-color: var(--surface-container-low); padding: var(--spacing-lg); border-width: 1px; position: relative; overflow: hidden; }
+.status-card { background-color: rgba(255, 255, 255, 0.01); padding: var(--spacing-xl); border-width: 1px; position: relative; overflow: hidden; }
 .progress-item { display: flex; flex-direction: column; gap: var(--spacing-xs); margin-bottom: var(--spacing-md); }
 .progress-header { display: flex; justify-content: space-between; }
 .progress-track { height: 12px; background-color: var(--surface-variant); border-radius: var(--radius-full); overflow: hidden; }
