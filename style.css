@@ -280,8 +280,11 @@ input { font: inherit; }
   transition: var(--transition-fluid);
 }
 .card:hover { border-color: var(--primary); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1); }
+.col-3 { grid-column: span 3; }
 .col-4 { grid-column: span 4; }
+.col-6 { grid-column: span 6; }
 .col-8 { grid-column: span 8; }
+.col-12 { grid-column: span 12; }
 
 .card-header { display: flex; justify-content: space-between; align-items: flex-start; }
 .card-title-group { display: flex; align-items: center; gap: var(--spacing-sm); }

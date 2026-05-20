@@ -81,7 +81,7 @@
 
     <!-- Dashboard Grid -->
     <div class="dashboard-grid">
-      <!-- 1. Operational Cards (from old dashboard) -->
+      <!-- 1. Operational Cards -->
       <div class="card col-4 status-bar-active">
         <div class="card-header">
           <div class="card-title-group">
@@ -142,7 +142,7 @@
         </div>
       </div>
 
-      <!-- 2. OEE KPIs (from metrics) -->
+      <!-- 2. OEE KPIs -->
       <div class="card col-3">
         <div class="card-header">
           <div class="card-title-group">
@@ -213,19 +213,17 @@
         </div>
       </div>
 
-      <!-- 3. Takt vs Cycle Bar Chart (from metrics) + YAMAZUMI (from dashboard) -->
+      <!-- 3. Histórico e Paradas (Eficiência col-8 + Motivos col-4) -->
       <div class="card col-8 status-card">
         <div class="card-header" style="margin-bottom:16px;">
           <h4 class="font-headline-sm">Eficiência do Ciclo Produtivo</h4>
           <span class="font-label-sm text-on-surface-variant">Histórico Semanal (Minutos por unidade)</span>
         </div>
         <div style="height: 240px; display: flex; align-items: flex-end; gap: 16px; padding-top: 24px; position: relative; border-bottom: 1px solid var(--outline-variant);">
-          <!-- Takt Line -->
           <div style="position: absolute; top: 40px; left: 0; width: 100%; border-top: 1px dashed var(--tertiary);">
              <span style="position: absolute; right: 0; top: -20px; font-size: 10px; color: var(--tertiary);">TAKT: 45m</span>
           </div>
           
-          <!-- Bars -->
           <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px;">
             <div style="width: 100%; background: var(--primary); height: 120px; border-radius: 4px 4px 0 0; opacity: 0.8; transition: var(--transition-fluid); cursor: pointer;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.8'"></div>
             <span class="font-label-sm">SEG</span>
@@ -251,38 +249,50 @@
 
       <div class="card col-4">
         <div class="card-header" style="margin-bottom:16px;">
-          <span class="font-label-md text-primary font-bold">BALANCEAMENTO (YAMAZUMI)</span>
-          <span class="material-symbols-outlined text-primary">equalizer</span>
+          <h4 class="font-headline-sm">Motivos de Parada</h4>
+          <span class="font-label-sm text-on-surface-variant">Top ofensores (Minutos)</span>
         </div>
-
-        <div style="position:relative; height:180px; display:flex; flex-direction:column; justify-content:space-between;">
-          <div style="position:absolute; right:25%; top:0; bottom:0; border-left:1px dashed rgba(176,198,255,0.5); z-index:10; display:flex; flex-direction:column; align-items:center;">
-            <span style="background:var(--primary); color:var(--on-primary); font-size:10px; padding:2px 4px; border-radius:2px; transform:translateY(-8px);">TAKT</span>
+        <div style="display: flex; flex-direction: column; gap: 20px;">
+          <div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+              <span class="font-label-md">Manutenção Corretiva</span>
+              <span class="font-label-md text-error">142m</span>
+            </div>
+            <div class="progress-track" style="height: 8px;">
+              <div class="progress-fill bg-error" style="width: 100%"></div>
+            </div>
           </div>
-
-          <div style="display:flex; flex-direction:column; gap:4px;">
-            <span class="font-label-sm text-on-surface-variant">Bobinagem</span>
-            <div style="height:12px; background:rgba(176,198,255,0.2); width:50%; border-radius:0 2px 2px 0;"></div>
+          <div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+              <span class="font-label-md">Falta de Material</span>
+              <span class="font-label-md text-primary">85m</span>
+            </div>
+            <div class="progress-track" style="height: 8px;">
+              <div class="progress-fill" style="background: var(--primary); width: 60%"></div>
+            </div>
           </div>
-          <div style="display:flex; flex-direction:column; gap:4px;">
-            <span class="font-label-sm text-error font-bold">Montagem (Gargalo)</span>
-            <div style="height:12px; background:var(--error); width:85%; border-radius:0 2px 2px 0;"></div>
+          <div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+              <span class="font-label-md">Setup de Máquina</span>
+              <span class="font-label-md text-primary">45m</span>
+            </div>
+            <div class="progress-track" style="height: 8px;">
+              <div class="progress-fill" style="background: var(--primary); width: 32%"></div>
+            </div>
           </div>
-          <div style="display:flex; flex-direction:column; gap:4px;">
-            <span class="font-label-sm text-on-surface-variant">Testes</span>
-            <div style="height:12px; background:rgba(176,198,255,0.2); width:60%; border-radius:0 2px 2px 0;"></div>
-          </div>
-          <div style="display:flex; flex-direction:column; gap:4px;">
-            <span class="font-label-sm text-on-surface-variant">Acabamento</span>
-            <div style="height:12px; background:rgba(176,198,255,0.2); width:40%; border-radius:0 2px 2px 0;"></div>
+          <div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+              <span class="font-label-md">Limpeza</span>
+              <span class="font-label-md text-primary">20m</span>
+            </div>
+            <div class="progress-track" style="height: 8px;">
+              <div class="progress-fill" style="background: var(--primary); width: 14%"></div>
+            </div>
           </div>
         </div>
-        <p style="font-size:10px; color:var(--on-surface-variant); font-style:italic; text-align:center; border-top:1px solid var(--outline-variant); padding-top:8px; margin-top:16px;">
-          Análise em Tempo Real: Setor Montagem excedendo limite em 12%.
-        </p>
       </div>
 
-      <!-- 4. Ritmo de Produção (Progress from old dashboard) + Pareto (from metrics) -->
+      <!-- 4. Ritmo Atual e Gargalos (Ritmo col-8 + Yamazumi col-4) -->
       <div class="card col-8 status-card">
         <div class="card-header" style="margin-bottom:16px;">
           <h4 class="font-headline-sm">Ritmo de Produção (Takt vs. Cycle)</h4>
@@ -333,47 +343,35 @@
 
       <div class="card col-4">
         <div class="card-header" style="margin-bottom:16px;">
-          <h4 class="font-headline-sm">Motivos de Parada</h4>
-          <span class="font-label-sm text-on-surface-variant">Top ofensores (Minutos)</span>
+          <span class="font-label-md text-primary font-bold">BALANCEAMENTO (YAMAZUMI)</span>
+          <span class="material-symbols-outlined text-primary">equalizer</span>
         </div>
-        <div style="display: flex; flex-direction: column; gap: 20px;">
-          <div>
-            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-              <span class="font-label-md">Manutenção Corretiva</span>
-              <span class="font-label-md text-error">142m</span>
-            </div>
-            <div class="progress-track" style="height: 8px;">
-              <div class="progress-fill bg-error" style="width: 100%"></div>
-            </div>
+
+        <div style="position:relative; height:180px; display:flex; flex-direction:column; justify-content:space-between;">
+          <div style="position:absolute; right:25%; top:0; bottom:0; border-left:1px dashed rgba(176,198,255,0.5); z-index:10; display:flex; flex-direction:column; align-items:center;">
+            <span style="background:var(--primary); color:var(--on-primary); font-size:10px; padding:2px 4px; border-radius:2px; transform:translateY(-8px);">TAKT</span>
           </div>
-          <div>
-            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-              <span class="font-label-md">Falta de Material</span>
-              <span class="font-label-md text-primary">85m</span>
-            </div>
-            <div class="progress-track" style="height: 8px;">
-              <div class="progress-fill" style="background: var(--primary); width: 60%"></div>
-            </div>
+
+          <div style="display:flex; flex-direction:column; gap:4px;">
+            <span class="font-label-sm text-on-surface-variant">Bobinagem</span>
+            <div style="height:12px; background:rgba(176,198,255,0.2); width:50%; border-radius:0 2px 2px 0;"></div>
           </div>
-          <div>
-            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-              <span class="font-label-md">Setup de Máquina</span>
-              <span class="font-label-md text-primary">45m</span>
-            </div>
-            <div class="progress-track" style="height: 8px;">
-              <div class="progress-fill" style="background: var(--primary); width: 32%"></div>
-            </div>
+          <div style="display:flex; flex-direction:column; gap:4px;">
+            <span class="font-label-sm text-error font-bold">Montagem (Gargalo)</span>
+            <div style="height:12px; background:var(--error); width:85%; border-radius:0 2px 2px 0;"></div>
           </div>
-          <div>
-            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-              <span class="font-label-md">Limpeza</span>
-              <span class="font-label-md text-primary">20m</span>
-            </div>
-            <div class="progress-track" style="height: 8px;">
-              <div class="progress-fill" style="background: var(--primary); width: 14%"></div>
-            </div>
+          <div style="display:flex; flex-direction:column; gap:4px;">
+            <span class="font-label-sm text-on-surface-variant">Testes</span>
+            <div style="height:12px; background:rgba(176,198,255,0.2); width:60%; border-radius:0 2px 2px 0;"></div>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:4px;">
+            <span class="font-label-sm text-on-surface-variant">Acabamento</span>
+            <div style="height:12px; background:rgba(176,198,255,0.2); width:40%; border-radius:0 2px 2px 0;"></div>
           </div>
         </div>
+        <p style="font-size:10px; color:var(--on-surface-variant); font-style:italic; text-align:center; border-top:1px solid var(--outline-variant); padding-top:8px; margin-top:16px;">
+          Análise em Tempo Real: Setor Montagem excedendo limite em 12%.
+        </p>
       </div>
 
       <!-- 5. Tabela de Auditoria (from metrics) -->
